@@ -6,7 +6,10 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import { SyncStorageProvider, useSyncStorage } from 'react-native-sync-storage';
+import {
+  SyncStorageProvider,
+  useSyncStorage,
+} from '@fullstackhouse/react-native-sync-storage';
 
 function StorageDemo() {
   const { storage, loaded } = useSyncStorage();

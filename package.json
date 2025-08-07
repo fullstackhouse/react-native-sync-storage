@@ -1,5 +1,5 @@
 {
-  "name": "react-native-sync-storage",
+  "name": "@fullstackhouse/react-native-sync-storage",
   "version": "0.1.0",
   "description": "Synchronous storage library for React Native",
   "main": "./lib/module/index.js",
@@ -47,14 +47,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/author/react-native-sync-storage.git"
+    "url": "git+https://github.com/fullstackhouse/react-native-sync-storage.git"
   },
-  "author": "Author <author@example.com> (https://example.com)",
+  "author": "FullStackHouse <hello@fullstackhouse.com> (https://fullstackhouse.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/author/react-native-sync-storage/issues"
+    "url": "https://github.com/fullstackhouse/react-native-sync-storage/issues"
   },
-  "homepage": "https://github.com/author/react-native-sync-storage#readme",
+  "homepage": "https://github.com/fullstackhouse/react-native-sync-storage#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -99,6 +99,9 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests/"
     ],
     "setupFiles": [
       "<rootDir>/jest.setup.js"
