@@ -81,6 +81,7 @@
     "react": "19.0.0",
     "react-native": "0.79.5",
     "react-native-builder-bob": "^0.40.13",
+    "react-test-renderer": "19.0.0",
     "release-it": "^17.10.0",
     "typescript": "^5.8.3"
   },
@@ -98,8 +99,8 @@
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
     ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/test/setup.ts"
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
     ]
   },
   "commitlint": {
