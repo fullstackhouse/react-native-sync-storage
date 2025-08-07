@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 import SyncStorage from './SyncStorage';
 
 export interface SyncStorageContextValue {
@@ -6,7 +6,9 @@ export interface SyncStorageContextValue {
   loaded: boolean;
 }
 
-export const SyncStorageContext = createContext<SyncStorageContextValue | null>(null);
+export const SyncStorageContext = createContext<SyncStorageContextValue | null>(
+  null
+);
 
 export const useSyncStorage = (): SyncStorageContextValue => {
   const context = useContext(SyncStorageContext);

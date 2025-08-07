@@ -1,6 +1,19 @@
-import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  jest,
+  afterEach,
+} from '@jest/globals';
+import {
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+} from '@testing-library/react-native';
 import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SyncStorageProvider } from '../SyncStorageProvider';
 import { useSyncStorage } from '../SyncStorageContext';
@@ -10,48 +23,42 @@ const mockAsyncStorage = AsyncStorage as any;
 const TestComponent: React.FC = () => {
   const { storage, loaded } = useSyncStorage();
   const [, forceUpdate] = React.useState({});
+  const [itemValue, setItemValue] = React.useState<string | null>(null);
 
   return (
-    <div>
-      <div data-testid="is-loaded">{loaded.toString()}</div>
-      <button
-        data-testid="set-item"
-        onClick={() => {
+    <View>
+      <Text testID="is-loaded">{loaded.toString()}</Text>
+      <TouchableOpacity
+        testID="set-item"
+        onPress={() => {
           storage.setItem('test-key', 'test-value');
           forceUpdate({});
         }}
       >
-        Set Item
-      </button>
-      <button
-        data-testid="get-item"
-        onClick={() => {
+        <Text>Set Item</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        testID="get-item"
+        onPress={() => {
           const value = storage.getItem('test-key');
-          const element = document.createElement('div');
-          element.setAttribute('data-testid', 'item-value');
-          element.textContent = value || 'null';
-          document.body.appendChild(element);
+          setItemValue(value);
         }}
       >
-        Get Item
-      </button>
-      <div data-testid="all-keys">
-        {storage.getAllKeys().join(',')}
-      </div>
-    </div>
+        <Text>Get Item</Text>
+      </TouchableOpacity>
+      {itemValue && <Text testID="item-value">{itemValue}</Text>}
+      <Text testID="all-keys">{storage.getAllKeys().join(',')}</Text>
+    </View>
   );
 };
 
 describe('SyncStorageProvider', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
-    
-    const existingElements = document.querySelectorAll('[data-testid="item-value"]');
-    existingElements.forEach(el => el.remove());
+    jest.clearAllMocks();
   });
 
   afterEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should provide sync storage context to children', async () => {
@@ -71,7 +78,9 @@ describe('SyncStorageProvider', () => {
 
   it('should initialize with existing AsyncStorage data', async () => {
     mockAsyncStorage.getAllKeys.mockResolvedValue(['existing-key']);
-    mockAsyncStorage.multiGet.mockResolvedValue([['existing-key', 'existing-value']]);
+    mockAsyncStorage.multiGet.mockResolvedValue([
+      ['existing-key', 'existing-value'],
+    ]);
 
     render(
       <SyncStorageProvider>
@@ -104,12 +113,11 @@ describe('SyncStorageProvider', () => {
     const setButton = screen.getByTestId('set-item');
     const getButton = screen.getByTestId('get-item');
 
-    setButton.click();
-    getButton.click();
+    fireEvent.press(setButton);
+    fireEvent.press(getButton);
 
     await waitFor(() => {
-      const valueElement = document.querySelector('[data-testid="item-value"]');
-      expect(valueElement).toHaveTextContent('test-value');
+      expect(screen.getByTestId('item-value')).toHaveTextContent('test-value');
     });
 
     await waitFor(() => {
@@ -118,8 +126,12 @@ describe('SyncStorageProvider', () => {
   });
 
   it('should handle initialization failure gracefully', async () => {
-    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    mockAsyncStorage.getAllKeys.mockRejectedValue(new Error('AsyncStorage failed'));
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    mockAsyncStorage.getAllKeys.mockRejectedValue(
+      new Error('AsyncStorage failed')
+    );
 
     render(
       <SyncStorageProvider>
@@ -142,9 +154,9 @@ describe('SyncStorageProvider', () => {
     const TestComponentOutsideProvider = () => {
       try {
         useSyncStorage();
-        return <div>Should not render</div>;
+        return <Text>Should not render</Text>;
       } catch (error) {
-        return <div data-testid="error">{(error as Error).message}</div>;
+        return <Text testID="error">{(error as Error).message}</Text>;
       }
     };
 

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, jest } from '@jest/globals';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SyncStorage from '../SyncStorage';
 
@@ -9,7 +9,7 @@ describe('SyncStorage', () => {
 
   beforeEach(() => {
     syncStorage = new SyncStorage();
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('load', () => {
@@ -79,13 +79,17 @@ describe('SyncStorage', () => {
     });
 
     it('should handle AsyncStorage persistence failure silently', () => {
-      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      mockAsyncStorage.setItem.mockRejectedValue(new Error('Persistence failed'));
+      const consoleSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {});
+      mockAsyncStorage.setItem.mockRejectedValue(
+        new Error('Persistence failed')
+      );
 
       syncStorage.setItem('key1', 'value1');
 
       expect(syncStorage.getItem('key1')).toBe('value1');
-      
+
       setTimeout(() => {
         expect(consoleSpy).toHaveBeenCalledWith(
           'Failed to persist item to AsyncStorage:',
@@ -175,7 +179,10 @@ describe('SyncStorage', () => {
       expect(syncStorage.getItem('key1')).toBeNull();
       expect(syncStorage.getItem('key2')).toBeNull();
       expect(syncStorage.getItem('key3')).toBe('value3');
-      expect(mockAsyncStorage.multiRemove).toHaveBeenCalledWith(['key1', 'key2']);
+      expect(mockAsyncStorage.multiRemove).toHaveBeenCalledWith([
+        'key1',
+        'key2',
+      ]);
     });
   });
 });

@@ -1,18 +1,17 @@
-import { vi } from 'vitest';
-import '@testing-library/jest-dom';
+import { jest } from '@jest/globals';
 
 const mockAsyncStorage = {
-  getItem: vi.fn(() => Promise.resolve(null)),
-  setItem: vi.fn(() => Promise.resolve()),
-  removeItem: vi.fn(() => Promise.resolve()),
-  getAllKeys: vi.fn(() => Promise.resolve([])),
-  multiGet: vi.fn(() => Promise.resolve([])),
-  multiSet: vi.fn(() => Promise.resolve()),
-  multiRemove: vi.fn(() => Promise.resolve()),
-  clear: vi.fn(() => Promise.resolve()),
+  getItem: jest.fn(() => Promise.resolve(null)),
+  setItem: jest.fn(() => Promise.resolve()),
+  removeItem: jest.fn(() => Promise.resolve()),
+  getAllKeys: jest.fn(() => Promise.resolve([])),
+  multiGet: jest.fn(() => Promise.resolve([])),
+  multiSet: jest.fn(() => Promise.resolve()),
+  multiRemove: jest.fn(() => Promise.resolve()),
+  clear: jest.fn(() => Promise.resolve()),
 };
 
-vi.mock('@react-native-async-storage/async-storage', () => ({
+jest.mock('@react-native-async-storage/async-storage', () => ({
   default: mockAsyncStorage,
 }));
 

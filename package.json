@@ -67,6 +67,8 @@
     "@react-native/babel-preset": "0.78.2",
     "@react-native/eslint-config": "^0.78.0",
     "@release-it/conventional-changelog": "^9.0.2",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/react-native": "^13.2.2",
     "@types/jest": "^29.5.5",
     "@types/react": "^19.0.12",
     "commitlint": "^19.6.1",
@@ -95,6 +97,9 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/test/setup.ts"
     ]
   },
   "commitlint": {
@@ -150,5 +155,8 @@
     "type": "library",
     "languages": "js",
     "version": "0.52.0"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.2.0"
   }
 }

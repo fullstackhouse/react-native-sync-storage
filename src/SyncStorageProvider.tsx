@@ -1,12 +1,18 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import SyncStorage, { SyncStorageOptions } from './SyncStorage';
-import { SyncStorageContext, SyncStorageContextValue } from './SyncStorageContext';
+import SyncStorage, { type SyncStorageOptions } from './SyncStorage';
+import {
+  SyncStorageContext,
+  type SyncStorageContextValue,
+} from './SyncStorageContext';
 
 export interface SyncStorageProviderProps extends SyncStorageOptions {
   children: React.ReactNode;
 }
 
-export const SyncStorageProvider: React.FC<SyncStorageProviderProps> = ({ children, ...options }) => {
+export const SyncStorageProvider: React.FC<SyncStorageProviderProps> = ({
+  children,
+  ...options
+}) => {
   const [storage] = useState(() => new SyncStorage(options));
   const [loaded, setLoaded] = useState(false);
 
@@ -23,10 +29,13 @@ export const SyncStorageProvider: React.FC<SyncStorageProviderProps> = ({ childr
     loadStorage();
   }, [storage]);
 
-  const contextValue: SyncStorageContextValue = useMemo(() => ({
-    storage,
-    loaded,
-  }), [storage, loaded]);
+  const contextValue: SyncStorageContextValue = useMemo(
+    () => ({
+      storage,
+      loaded,
+    }),
+    [storage, loaded]
+  );
 
   return (
     <SyncStorageContext.Provider value={contextValue}>
@@ -34,4 +43,3 @@ export const SyncStorageProvider: React.FC<SyncStorageProviderProps> = ({ childr
     </SyncStorageContext.Provider>
   );
 };
-
