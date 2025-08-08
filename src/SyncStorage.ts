@@ -6,7 +6,7 @@ export interface SyncStorageOptions {
 
 class SyncStorage {
   private storage: Map<string, string> = new Map();
-  private isLoaded: boolean = false;
+  public loaded: boolean = false;
   private prefix: string;
 
   constructor(options: SyncStorageOptions = {}) {
@@ -18,8 +18,6 @@ class SyncStorage {
   }
 
   async load(): Promise<void> {
-    if (this.isLoaded) return;
-
     try {
       const keys = await AsyncStorage.getAllKeys();
       const prefixedKeys = this.prefix
@@ -37,7 +35,7 @@ class SyncStorage {
         }
       }
 
-      this.isLoaded = true;
+      this.loaded = true;
     } catch (error) {
       console.error('Failed to load SyncStorage:', error);
       throw error;
@@ -104,10 +102,6 @@ class SyncStorage {
     AsyncStorage.multiRemove(prefixedKeys).catch((error: any) => {
       console.warn('Failed to remove items from AsyncStorage:', error);
     });
-  }
-
-  get loaded(): boolean {
-    return this.isLoaded;
   }
 }
 

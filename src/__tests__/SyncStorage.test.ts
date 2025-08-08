@@ -40,15 +40,25 @@ describe('SyncStorage', () => {
       expect(syncStorage.getItem('key2')).toBeNull();
     });
 
-    it('should not reload if already loaded', async () => {
+    it('should reload data when load is called again', async () => {
       mockAsyncStorage.getAllKeys.mockResolvedValue(['key1']);
       mockAsyncStorage.multiGet.mockResolvedValue([['key1', 'value1']]);
 
       await syncStorage.load();
       expect(mockAsyncStorage.getAllKeys).toHaveBeenCalledTimes(1);
+      expect(syncStorage.loaded).toBe(true);
+
+      // Simulate data change in AsyncStorage
+      mockAsyncStorage.getAllKeys.mockResolvedValue(['key1', 'key2']);
+      mockAsyncStorage.multiGet.mockResolvedValue([
+        ['key1', 'updated'],
+        ['key2', 'value2'],
+      ]);
 
       await syncStorage.load();
-      expect(mockAsyncStorage.getAllKeys).toHaveBeenCalledTimes(1);
+      expect(mockAsyncStorage.getAllKeys).toHaveBeenCalledTimes(2);
+      expect(syncStorage.getItem('key1')).toBe('updated');
+      expect(syncStorage.getItem('key2')).toBe('value2');
     });
 
     it('should throw error if AsyncStorage fails', async () => {
