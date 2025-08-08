@@ -18,28 +18,23 @@ class SyncStorage {
   }
 
   async load(): Promise<void> {
-    try {
-      const keys = await AsyncStorage.getAllKeys();
-      const prefixedKeys = this.prefix
-        ? keys.filter((key: string) => key.startsWith(this.prefix))
-        : keys;
-      const items = await AsyncStorage.multiGet(prefixedKeys);
+    const keys = await AsyncStorage.getAllKeys();
+    const prefixedKeys = this.prefix
+      ? keys.filter((key: string) => key.startsWith(this.prefix))
+      : keys;
+    const items = await AsyncStorage.multiGet(prefixedKeys);
 
-      for (const [storageKey, value] of items) {
-        if (value !== null) {
-          const userKey =
-            this.prefix && storageKey.startsWith(this.prefix)
-              ? storageKey.slice(this.prefix.length)
-              : storageKey;
-          this.storage.set(userKey, value);
-        }
+    for (const [storageKey, value] of items) {
+      if (value !== null) {
+        const userKey =
+          this.prefix && storageKey.startsWith(this.prefix)
+            ? storageKey.slice(this.prefix.length)
+            : storageKey;
+        this.storage.set(userKey, value);
       }
-
-      this.loaded = true;
-    } catch (error) {
-      console.error('Failed to load SyncStorage:', error);
-      throw error;
     }
+
+    this.loaded = true;
   }
 
   getItem(key: string): string | null {
