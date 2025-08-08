@@ -48,14 +48,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jacekatomaszewski/react-native-sync-storage.git"
+    "url": "git+https://github.com/fullstackhouse/react-native-sync-storage.git"
   },
   "author": "Jacek Tomaszewski <jacek@fullstack.house> (https://fullstack.house)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jacekatomaszewski/react-native-sync-storage/issues"
+    "url": "https://github.com/fullstackhouse/react-native-sync-storage/issues"
   },
-  "homepage": "https://github.com/jacekatomaszewski/react-native-sync-storage#readme",
+  "homepage": "https://github.com/fullstackhouse/react-native-sync-storage#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
