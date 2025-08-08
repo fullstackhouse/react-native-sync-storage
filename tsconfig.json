@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-sync-storage": ["./src/index"]
+      "@fullstackhouse/react-native-sync-storage": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
