@@ -2283,7 +2283,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fullstackhouse/react-native-sync-storage@workspace:.":
+"@fullstackhouse/react-native-sync-storage@*, @fullstackhouse/react-native-sync-storage@workspace:.":
   version: 0.0.0-use.local
   resolution: "@fullstackhouse/react-native-sync-storage@workspace:."
   dependencies:
@@ -2315,6 +2315,7 @@ __metadata:
     release-it: ^17.10.0
     typescript: ^5.8.3
   peerDependencies:
+    "@react-native-async-storage/async-storage": "*"
     react: "*"
     react-native: "*"
   languageName: unknown
@@ -11308,6 +11309,8 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.0
     "@expo/metro-runtime": ~5.0.4
+    "@fullstackhouse/react-native-sync-storage": "*"
+    "@react-native-async-storage/async-storage": ^2.2.0
     expo: ~53.0.20
     expo-status-bar: ~2.2.3
     react: 19.0.0

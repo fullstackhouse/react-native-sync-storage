@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import SyncStorage from './SyncStorage';
+import { SyncStorage } from './SyncStorage';
 
 export interface SyncStorageContextValue {
   storage: SyncStorage;

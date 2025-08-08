@@ -94,7 +94,7 @@ function StorageDemo() {
   );
 }
 
-export default function App() {
+export function App() {
   return (
     <SyncStorageProvider>
       <StorageDemo />

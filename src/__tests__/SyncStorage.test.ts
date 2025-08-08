@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, jest } from '@jest/globals';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SyncStorage from '../SyncStorage';
+import { SyncStorage } from '../SyncStorage';
 
 const mockAsyncStorage = AsyncStorage as any;
 

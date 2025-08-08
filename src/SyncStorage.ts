@@ -111,4 +111,4 @@ class SyncStorage {
   }
 }
 
-export default SyncStorage;
+export { SyncStorage };

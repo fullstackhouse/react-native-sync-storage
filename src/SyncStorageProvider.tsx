@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import SyncStorage, { type SyncStorageOptions } from './SyncStorage';
+import { SyncStorage, type SyncStorageOptions } from './SyncStorage';
 import {
   SyncStorageContext,
   type SyncStorageContextValue,

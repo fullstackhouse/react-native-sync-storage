@@ -47,14 +47,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fullstackhouse/react-native-sync-storage.git"
+    "url": "git+https://github.com/jacekatomaszewski/react-native-sync-storage.git"
   },
-  "author": "FullStackHouse <hello@fullstackhouse.com> (https://fullstackhouse.com)",
+  "author": "Jacek Tomaszewski <jacek@fullstack.house> (https://fullstack.house)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fullstackhouse/react-native-sync-storage/issues"
+    "url": "https://github.com/jacekatomaszewski/react-native-sync-storage/issues"
   },
-  "homepage": "https://github.com/fullstackhouse/react-native-sync-storage#readme",
+  "homepage": "https://github.com/jacekatomaszewski/react-native-sync-storage#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -65,6 +65,7 @@
     "@eslint/js": "^9.22.0",
     "@evilmartians/lefthook": "^1.5.0",
     "@playwright/test": "^1.54.2",
+    "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native/babel-preset": "0.78.2",
     "@react-native/eslint-config": "^0.78.0",
     "@release-it/conventional-changelog": "^9.0.2",
@@ -87,6 +88,7 @@
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
+    "@react-native-async-storage/async-storage": "*",
     "react": "*",
     "react-native": "*"
   },
@@ -160,8 +162,5 @@
     "type": "library",
     "languages": "js",
     "version": "0.52.0"
-  },
-  "dependencies": {
-    "@react-native-async-storage/async-storage": "^2.2.0"
   }
 }
