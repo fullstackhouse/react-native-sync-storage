@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -16,6 +16,14 @@ function StorageDemo() {
   const [key, setKey] = useState('test-key');
   const [value, setValue] = useState('test-value');
   const [retrievedValue, setRetrievedValue] = useState<string | null>(null);
+
+  // Retrieve value when screen loads
+  useEffect(() => {
+    if (loaded) {
+      const storedValue = storage.getItem(key);
+      setRetrievedValue(storedValue);
+    }
+  }, [loaded, storage, key]);
 
   const handleSetItem = () => {
     storage.setItem(key, value);

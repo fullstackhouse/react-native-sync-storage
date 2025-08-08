@@ -34,6 +34,7 @@
   "scripts": {
     "example": "yarn workspace react-native-sync-storage-example",
     "test": "jest",
+    "test:e2e": "playwright test",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
